@@ -11,3 +11,8 @@ Given the gigantic nature of v8’s project,I choose as a starting point the int
  
  
 Unfortunately, while an exploited bug in v8 would result in code execution, we won’t be able to execute any code due to the sandbox, and as such we would get code execution in the context of the renderer,which would not allow us to execute code on the machine. For that we would need another exploit for the sandbox,thus we would need a full chain in order to exploit the system.
+ 
+ | Goals  | 
+| ------------- | 
+| Learn,map,master the internal structures used by V8 engine and the key points of Chrome architecture | 
+| Learn and master the basics necessary for browser exploitation  | 
