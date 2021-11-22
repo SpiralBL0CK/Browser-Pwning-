@@ -27,3 +27,6 @@ And such we define the following goals in order to be able to get started with b
 | ------------- | 
 | Learn,map,master the internal structures used by V8 engine and the key points of Chrome architecture | 
 | Learn and master the basics procedures necessary for browser exploitation  | 
+
+# Learn,map,master the internal structures used by V8 engine and the key points of Chrome architecture 
+  At the first stage of the project it's necessary to gather as much knowledge regarding Chrome Architecture and how each componenet interact with each other. In order to better understand this we need to the Chromium Project into multiple subcomponenets such that we are able to isolate everything and analyse it properly
