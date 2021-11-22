@@ -26,4 +26,4 @@ And such we define the following goals in order to be able to get started with b
  | Goals  | 
 | ------------- | 
 | Learn,map,master the internal structures used by V8 engine and the key points of Chrome architecture | 
-| Learn and master the basics necessary for browser exploitation  | 
+| Learn and master the basics procedures necessary for browser exploitation  | 
