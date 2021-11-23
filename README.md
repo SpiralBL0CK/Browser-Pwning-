@@ -38,5 +38,15 @@ And such we define the following goals in order to be able to get started with b
 Now the most logical step for a first step is understanding chromium architecture.
    So ok we want to exploit the browser, but what happends when we first start the browser? Well after clicking the chromium executable , the executable starts some processes.
    The order and their name is as follows:
-     First one is called browser process.
-  
+   
+     First one is called browser process. What does this process do ?
+          * well it is the central coordinator of all the processes, and operates at the highest privilege level available to the browser. It is also know as the startup process.
+          * it is also the main process
+          * it's lifespan is throught the browser's entire lifetime.
+          * it controls features such as the address bar, bookmarks and the back/forward/reload buttons.
+          * it does not trust the data given to it by any of the other processes
+          * if another process would like to do a more highly privilleged action such as interracting with the UI,filesystem storage or network it does that for the respective process and it handles back the results to that process.
+          
+          Now that we briefly know what it does it is time to go more indepth on it:
+            *So the way Chromium works on Windows at least, is that it compiles the files into a dll , and after that it loads it into memory. So the core logic of Chroium browser is in chromium.dll.
+             *Now lets see what it does. we open chromium.dll in ida 
