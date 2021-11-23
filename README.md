@@ -29,5 +29,14 @@ And such we define the following goals in order to be able to get started with b
 | Learn and master the basics procedures necessary for browser exploitation  | 
 
 # Learn,map,master the internal structures used by V8 engine and the key points of Chrome architecture 
-  At the first stage of the project it's necessary to gather as much knowledge regarding Chrome Architecture and how each componenet interact with each other. In order to better understand this we need to the Chromium Project into multiple subcomponenets such that we are able to isolate everything and analyse it properly. More precisely in how many subcomponents each of the following components breaks [1]
+  At the first stage of the project it's necessary to gather as much knowledge regarding Chrome Architecture and how each componenet interact with each other. In order to better understand this we need to the Chromium Project into multiple subcomponenets such that we are able to isolate everything and analyse it properly. More precisely in how many subcomponents each of the following components breaks 
+  V8 Architecture
+  Chromium Architecture
+  Blink Architecture
+  
+
+Now the most logical step for a first step is understanding chromium architecture.
+   So ok we want to exploit the browser, but what happends when we first start the browser? Well after clicking the chromium executable , the executable starts some processes.
+   The order and their name is as follows:
+     First one is called browser process.
   
