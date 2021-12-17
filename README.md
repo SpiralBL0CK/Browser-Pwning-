@@ -49,4 +49,7 @@ Now the most logical step for a first step is understanding chromium architectur
           
           Now that we briefly know what it does it is time to go more indepth on it:
             *So the way Chromium works on Windows at least, is that it compiles the files into a dll , and after that it loads it into memory. So the core logic of Chroium browser is in chromium.dll.
-             *Now lets see what it does. we open chromium.dll in ida 
+             *Now lets see what it does. we open chromium.dll in binja 
+             Based on this picture from https://blogs.igalia.com/jaragunde/files/2019/03/chrome-init-sequence.png we have a rough ideea of what should we look after in binja
+             This is how the graph looks in binja![research](https://user-images.githubusercontent.com/25670930/146561718-139d5a5a-4759-4a44-98c2-2efabee4cb3d.PNG)
+
