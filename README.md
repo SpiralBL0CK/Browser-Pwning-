@@ -52,7 +52,9 @@ Now the most logical step for a first step is understanding chromium architectur
              *Now lets see what it does. we open chromium.dll in binja 
              Based on this picture from https://blogs.igalia.com/jaragunde/files/2019/03/chrome-init-sequence.png we have a rough ideea of what should we look after in binja
              This is how the graph looks in binja![research](https://user-images.githubusercontent.com/25670930/146561718-139d5a5a-4759-4a44-98c2-2efabee4cb3d.PNG) . To be able to better track it down look for a function called ChromeMain. This is chrome's main(aka core) logic.Inside of it we can see the afro-mention phases of how chrome.dll runs at startup:
-             Here we can see the first it calls some functions such as sub_180001420,sub_180017020,sub_180017020 which do some checking to see some details regarding how chrome was installed/compiled 
-              ![Capture](https://user-images.githubusercontent.com/25670930/146572896-6d40dbf2-fcec-4a6a-a0eb-13a4f26aa7df.PNG)
+             Here we can see the first it calls some functions such as sub_180001420,sub_180017020,sub_180017020 which do some checking to see some details regarding how chrome was installed/compiled. Ater that we can see a call to a function which i renamed ChromeMainDelegate.
+              ![Capture](https://user-images.githubusercontent.com/25670930/146572896-6d40dbf2-fcec-4a6a-a0eb-13a4f26aa7df.PNG). Inside of it there are some function calls which do some xor on some data regions andconcat it with some regitry to get some options regarding chrome startup ![Capture](https://user-images.githubusercontent.com/25670930/146581324-fdb4098f-fe78-49d4-b2a4-f7aab5c36be2.PNG). Also note that function sub_180001510 is creating a scopted pointer reference with two callbacks.Not really important thing that it does but it's interesting to learn what a BindStateBase  is. We will meet it a lot in the chrome's basecode.
+
+             
 
 
