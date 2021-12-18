@@ -66,10 +66,9 @@ Now the most logical step for a first step is understanding chromium architectur
               Now in case we don't provide any arguments to the shell the execution flow goes to ![10](https://user-images.githubusercontent.com/25670930/146630552-d76a440c-c4ae-4673-92ce-bcb7e76e52bc.PNG). In order to understand what it does we need to verify to source of it. We can find it at /src/content/app/content_main.cc
               We will have to scroll all the way to the bottom and and there we will find the definition of the ContentMain function. There we see it calls two functions. One which initialises a ContentMainRunner. And the other one which basically run the other processes. What is ContentMainRunner class? It's a helper class in order to avoid boiler plate code. The part we are interested is located at RunContentProcess, which is relatively big and such i will add snipptes of parts which we are interested in.
 ![11](https://user-images.githubusercontent.com/25670930/146630701-9b4a14f4-96f8-4e9b-8979-a1526ff51da7.PNG)
-![12](https://user-images.githubusercontent.com/25670930/146630707-2020c102-f17a-4d95-baed-eb1971fe4bb1.PNG)
-
-
-
-             
+![12](https://user-images.githubusercontent.com/25670930/146630707-2020c102-f17a-4d95-baed-eb1971fe4bb1.PNG)    
+![15](https://user-images.githubusercontent.com/25670930/146630906-72c1f5af-4da7-4a41-bdef-25fafb9ec7dc.PNG)
+![13](https://user-images.githubusercontent.com/25670930/146630907-5f0d9ab7-b8a4-49fb-ab96-5e759201ba5a.PNG)
+![14](https://user-images.githubusercontent.com/25670930/146630908-e4d89927-fd89-456c-8eca-644108335516.PNG)
 
 
