@@ -95,17 +95,11 @@ Now the most logical step for a first step is understanding chromium architectur
         From there we get to content_main_runner->Run(); which in essence does all the magic. Let's examine it under the hood. So content_main_runner is of class ContentMainRunner duhh.. which can be found at content\app\content_main_runner_impl.cc
          To actually be able to understand the code flow for this we have to take it from the bottom to the top. And this being said , we scroll down again and we find that actually ContentMainRunner::Create() calls infact ContentMainRunnerImpl::Create(); which makes us realise that in fact we will have to search for ContentMainRunnerImpl definition not for ContentMainRunner, which we find in content_main_runner_impl.h in the same already mentioned folder.![Capture 4PNG](https://user-images.githubusercontent.com/25670930/146663921-1188df62-5aca-4fad-a081-3c338380d3f4.PNG)
 We see that it inherits from ContentMainRunner and we can see it's core methods. Really there's not too much here as it's behaviour is mostly overwritten in content_main_runner_impl.cc
-         Inside content_main_runner_impl.cc, inside run method it first does some checking 
+         Inside content_main_runner_impl.cc, inside run method it first does some checking using DCHECK(what the hell is this function?(```The CHECK() macro will cause an immediate crash if its condition is not met. DCHECK() is like CHECK() but is only compiled in when DCHECK_IS_ON is true (debug builds and some bot configurations, but not end-user builds).``` quotes from google docs :) ) to see if is_initialized,content_main_params_,is_shutdown_ are set.
               
               
               
               
               
-              What is ContentMainRunner class? It's a helper class in order to avoid boiler plate code. The part we are interested is located at RunContentProcess, which is relatively big and such i will add snipptes of parts which we are interested in.
-![11](https://user-images.githubusercontent.com/25670930/146630701-9b4a14f4-96f8-4e9b-8979-a1526ff51da7.PNG)
-![12](https://user-images.githubusercontent.com/25670930/146630707-2020c102-f17a-4d95-baed-eb1971fe4bb1.PNG)    
-![15](https://user-images.githubusercontent.com/25670930/146630906-72c1f5af-4da7-4a41-bdef-25fafb9ec7dc.PNG)
-![13](https://user-images.githubusercontent.com/25670930/146630907-5f0d9ab7-b8a4-49fb-ab96-5e759201ba5a.PNG)
-![14](https://user-images.githubusercontent.com/25670930/146630908-e4d89927-fd89-456c-8eca-644108335516.PNG)
 
 
