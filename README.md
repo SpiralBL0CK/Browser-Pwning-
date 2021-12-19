@@ -65,7 +65,43 @@ Now the most logical step for a first step is understanding chromium architectur
               Stepping inside sub_184171800 we can see it is not that big ![commandline2](https://user-images.githubusercontent.com/25670930/146591178-c44dfc19-097b-4fa3-8e64-26c0c131a324.PNG) First it takes the arguments passed to the current process, than calls a function which takes a StringPiece basically a class wrapper for std::string but a little bit cooler and that function basically checks if the binary was called headless,compares is the name of the binary which was run is chrome , checks if USE_HEADLESS_CHROME is set and than goes further into next step which is content main.
               Based on the arguments provided , content main's job is to start the respective shell.
               Now in case we don't provide any arguments to the shell the execution flow goes to ![10](https://user-images.githubusercontent.com/25670930/146630552-d76a440c-c4ae-4673-92ce-bcb7e76e52bc.PNG). In order to understand what it does we need to verify to source of it. We can find it at /src/content/app/content_main.cc
-              We will have to scroll all the way to the bottom and and there we will find the definition of the ContentMain function. There we see it calls two functions. One which initialises a ContentMainRunner. And the other one which basically run the other processes. What is ContentMainRunner class? It's a helper class in order to avoid boiler plate code. The part we are interested is located at RunContentProcess, which is relatively big and such i will add snipptes of parts which we are interested in.
+              We will have to scroll all the way to the bottom and and there we will find the definition of the ContentMain function. There we see it calls two functions. One which initialises a ContentMainRunner which is the class that handles all the "process creation" in the context of creating the browser ipc sqli net and the rest. And the other one which basically check the type of subprocesses and feed it to the ContentMainRunner class. 
+              Now let's take a step back in order to understand the codeflow. First let's examine the RunContentProcess as ContentMainRunner is quite complex.First step it does is to create a GlobalActivityTracker. Omg !!! you guess it google tracks you :))) Nah just kidding pls don't sue me Google. But on a serious note this track each thread which is a thread tracker and it does a couple of cute things for better debugging such as:![Capture](https://user-images.githubusercontent.com/25670930/146662120-10749d1b-041c-45c3-87d6-deff628da350.PNG) which in essence means that there will be a unique integer used as an identifier for each thread to better understand what cause the process to break.
+              eg: ```
+                  kTypeIdActivityTracker = 0x5D7381AF + 4,   // SHA1(ActivityTracker) v4
+                  kTypeIdUserDataRecord = 0x615EDDD7 + 3,    // SHA1(UserDataRecord) v3
+                  kTypeIdGlobalLogMessage = 0x4CF434F9 + 1,  // SHA1(GlobalLogMessage) v1
+                  kTypeIdProcessDataRecord = kTypeIdUserDataRecord + 0x100,
+                  ```
+              tracking a process life stage which is defined as 
+              ```
+                  // The phases are generic and may have meaning to the tracker.
+              PROCESS_PHASE_UNKNOWN = 0,
+              PROCESS_LAUNCHED = 1,
+              PROCESS_LAUNCH_FAILED = 2,
+              PROCESS_EXITED_CLEANLY = 10,
+              PROCESS_EXITED_WITH_CODE = 11,
+
+              // Add here whatever is useful for analysis.
+              PROCESS_SHUTDOWN_STARTED = 100,
+              PROCESS_MAIN_LOOP_STARTED = 101,
+              ```
+              log asap when a process exits,save the information regarding the module aka when when a module(aka a componenet of chromium) is loaded and basically the same functinolity repeated but different for different threads and classes. In case you are interested you can find it at chromium/src/base/debug/activity_tracker.h 
+              Afterwards checks if "Main()" was called before. Here i think they mean if the ChromeMain() was called before. They basically check if there were passed any command to the content process was called with any arguments.And in case it was , they make sure the browser process will  get the same args.They than check for platform specific and in case windows is found the initialise they own handler by doing CreateATLModuleIfNeeded, than it's the same story checking for platform specifics and and they pass the arguments using SetupCRT and we get to the part where we initialise the ipc so we can talk to the other processes after we have spawned them. Here is the code responsabile for that. We won't go into details about it , as we will come back later discussing more indepth about the ipc mechanism of chrome. Just know this for the moment, this is the mechanism which facilitate the talking between the mutli architecture processes of chrome. And in case you don't know for what stands IPC, it's for inter process communication.![mojo](https://user-images.githubusercontent.com/25670930/146662673-32045099-b6b5-4a6c-89ff-5dd6efc4297b.PNG). Than what it does it "fordwards" rather more than sets the arguments for ui using ui::RegisterPathProvider, call the tracker and gets the result using content_main_runner->Initialize(std::move(params)) ,create a parent cosole, which i guess what they mean is that they create a parent process does some more checking and than we get to the important part which is ![Capture2](https://user-images.githubusercontent.com/25670930/146662970-9d31f08d-2d66-4b71-b344-650ded989893.PNG) . Here we see a call to a function called IsSubprocess. ![Capture3](https://user-images.githubusercontent.com/25670930/146663018-b27e2f7e-b8fe-4c48-b4fe-c3b2e7ee75c7.PNG) what it does basically to avoid the old boilderplate code it checks in one function the type of the process it receives on command line  and in case an option was passed it chooses from the following it creates the respective process. 
+         ```return type == switches::kGpuProcess ||
+         type == switches::kPpapiPluginProcess ||
+         type == switches::kRendererProcess ||
+         type == switches::kUtilityProcess || type == switches::kZygoteProcess;```
+        From there we get to content_main_runner->Run(); which in essence does all the magic. Let's examine it under the hood. So content_main_runner is of class ContentMainRunner duhh.. which can be found at content\app\content_main_runner_impl.cc
+         To actually be able to understand the code flow for this we have to take it from the bottom to the top. And this being said , we scroll down again and we find that actually ContentMainRunner::Create() calls infact ContentMainRunnerImpl::Create(); which makes us realise that in fact we will have to search for ContentMainRunnerImpl definition not for ContentMainRunner, which we find in content_main_runner_impl.h in the same already mentioned folder.![Capture 4PNG](https://user-images.githubusercontent.com/25670930/146663921-1188df62-5aca-4fad-a081-3c338380d3f4.PNG)
+We see that it inherits from ContentMainRunner and we can see it's core methods. Really there's not too much here as it's behaviour is mostly overwritten in content_main_runner_impl.cc
+         Inside content_main_runner_impl.cc, inside run method it first does some checking 
+              
+              
+              
+              
+              
+              What is ContentMainRunner class? It's a helper class in order to avoid boiler plate code. The part we are interested is located at RunContentProcess, which is relatively big and such i will add snipptes of parts which we are interested in.
 ![11](https://user-images.githubusercontent.com/25670930/146630701-9b4a14f4-96f8-4e9b-8979-a1526ff51da7.PNG)
 ![12](https://user-images.githubusercontent.com/25670930/146630707-2020c102-f17a-4d95-baed-eb1971fe4bb1.PNG)    
 ![15](https://user-images.githubusercontent.com/25670930/146630906-72c1f5af-4da7-4a41-bdef-25fafb9ec7dc.PNG)
