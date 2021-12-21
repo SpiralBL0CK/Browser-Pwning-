@@ -102,11 +102,15 @@ We see that it inherits from ContentMainRunner and we can see it's core methods.
 From there we want to break at ![zCapture](https://user-images.githubusercontent.com/25670930/146709631-7a95a673-58c3-466d-8b4a-6297decf61e6.PNG) which is basically a big check before jumping into content!content::ContentMain. from there we want to move over a few instructions and hit content!content::ContentMain. we want to step inside and break at content!content::RunContentProcess![Captuare](https://user-images.githubusercontent.com/25670930/146710883-9b474ede-1618-41bb-a9a5-a86c8fc44239.PNG) we want to step inside, and set a bp at content!content::ContentMainRunnerImpl::Run+0x430 and as soon as we step over ![Capture442](https://user-images.githubusercontent.com/25670930/146714548-934dc1e0-f994-40c0-90c0-ad99dfeb13e6.PNG) we see mojo ipc starting and we conclude that the next process aka browser process is responsable for actuall browser implementation and handling of all the other processes.![Captu1243re](https://user-images.githubusercontent.com/25670930/146714628-862e7ef3-b038-4658-bdb6-5b4db81dd378.PNG) 
 
 ===============================================================================================
-              
-
-
-
-
+Last time we left of after understanding content process. today we will go for browser process
+it's the process that is start after the content process and it's the second one in processes started by chrome.
+Let's briefly describe it:
+  *we can consider it the main process since the content process is more of a initialisation routine and some dependency checking,and it is started by the content process
+  *it stays alive throughout the browser's entire lifetime.
+  *It is the central coordinator of all the processes, and operates at the highest privilege level available to the browser.
+  *since it runs at highest privillege levels in case other processes need to achive a higher level operation, that request is gestioned by browser process.
+  *It controls features such as the address bar, bookmarks and the back/forward/reload buttons. Since this is the most privileged process it does not trust the data given to it by any of the other processes. 
+  *handles privileged operations such as UI, networking or filesystem storage for the other processes when necessary. 
 
               
               
