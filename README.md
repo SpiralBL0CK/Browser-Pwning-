@@ -103,6 +103,9 @@ From there we want to break at ![zCapture](https://user-images.githubusercontent
 
 ===============================================================================================
 
+2.
+
+
 Last time we left of after understanding content process. today we will go for browser process
 it's the process that is start after the content process and it's the second one in processes started by chrome.
 Let's briefly describe it:
