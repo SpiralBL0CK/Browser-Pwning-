@@ -112,10 +112,11 @@ Let's briefly describe it:
   *we can consider it the main process since the content process is more of a initialisation routine and some dependency checking,and it is started by the content process
   *it stays alive throughout the browser's entire lifetime.
   *It is the central coordinator of all the processes, and operates at the highest privilege level available to the browser.
-  *since it runs at highest privillege levels in case other processes need to achive a higher level operation, that request is gestioned by browser process.
+  *since it runs at highest privillege levels in case other processes need to achive a higher level operation, that request is handled by browser process.
   *It controls features such as the address bar, bookmarks and the back/forward/reload buttons. Since this is the most privileged process it does not trust the data given to it by any of the other processes. 
   *handles privileged operations such as UI, networking or filesystem storage for the other processes when necessary. 
-
+          Now that we briefly know what it does it is time to go more indepth on it:
+          
               
               
               
