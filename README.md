@@ -116,7 +116,7 @@ Let's briefly describe it:
   *It controls features such as the address bar, bookmarks and the back/forward/reload buttons. Since this is the most privileged process it does not trust the data given to it by any of the other processes. 
   *handles privileged operations such as UI, networking or filesystem storage for the other processes when necessary. 
           Now that we briefly know what it does it is time to go more indepth on it:
-          
+          Our journey starts at 
               
               
               
