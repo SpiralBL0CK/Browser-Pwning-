@@ -141,6 +141,9 @@ Dynamic Analysis Part
 =====================================================================
 
 4.Renderer Analysis 
+
+Last time we left we finished the browser process analysis and now it's time we have all been waiting for to go and do the renderer analysis part. Right, when i was playing with chromium i managed to make it crash and i got the following stack trace. ![numberunu](https://user-images.githubusercontent.com/25670930/147592286-b67e985c-a31c-485c-98eb-5f0d523a831e.PNG) Based on this we know out journey starts at content::RendererMain which is located in \content\renderer\renderer_main.cc .
+
  
 =====================================================================
 
