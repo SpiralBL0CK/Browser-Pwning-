@@ -131,7 +131,8 @@ Let's briefly describe it:
  
  ============================================================================================================
  
- 3.Now for the second part of browser process analysis we got to the point where we will be able to understand and debug the renderer, but we won't go there yet. I explicitly left one more function to analyse after RunBrowserProcessMain. Now what i left outside is that in content_main_runner_impl.cc there is another function which is called after 
+ 3.Now for the second part of browser process analysis we got to the point where we will be able to understand and debug the renderer, but we won't go there yet. I explicitly left one more function to analyse after RunBrowserProcessMain. Now what i left outside is that in content_main_runner_impl.cc there is another function which is called after we spawn the renderer and it's called RunOtherNamedProcessTypeMain. This process is incharge for running all the other processes.![Captureother](https://user-images.githubusercontent.com/25670930/147548808-5fcd1c18-87bf-4be7-aca6-b09d0de235eb.PNG)
+
 
 
 
