@@ -149,7 +149,7 @@ Last time we left we finished the browser process analysis and now it's time we 
 =====================================================================
 
 Dynamic Analysis Part
-
+Now in order to be able to debug it dynamically, in case you are as noob as i am you will want to run windbg from cmd.exe as follows windbg.exe chrome.exe -G -o --renderer-startup-dialog --no-sandbox --wait-for-debugger-children=renderer --renderer-process-limit=1 --allow-pre-commit-input --allow-sandbox-debugging --time-zone-for-testing="US/Pacific". 
 
 
 
