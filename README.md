@@ -178,7 +178,9 @@ Now in order to be able to debug it dynamically, in case you are as noob as i am
  
               
               
-              
+              ![soulk2](https://user-images.githubusercontent.com/25670930/147660857-867158b9-973c-4094-944c-7e8cdf221459.PNG)
+![soukl](https://user-images.githubusercontent.com/25670930/147660859-8f6c6fcb-f3eb-4cff-b328-e6e554fdae71.PNG)
+
               
               
 
