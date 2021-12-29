@@ -138,7 +138,8 @@ Here is a link to implement custom process and we will use this example for the 
 
 Dynamic Analysis Part 
  
- First part of the dynamic analysis starts as follows: first run from a cmd.exe with admin right the following command: windbg.exe chrome.exe -G -o --renderer-startup-dialog --no-sandbox --wait-for-debugger-children=renderer --renderer-process-limit=1 --allow-pre-commit-input --allow-sandbox-debugging . After that set .childdbg 1 so we can debug new spawned child processes. In essence what the upper command does is "ensure you are attached to all child processes". Shout out goes to @spoofyroot and @_coreDump for pointing me into the right direction with mutliprocess debugging
+ First part of the dynamic analysis starts as follows: first run from a cmd.exe with admin right the following command: windbg.exe chrome.exe -G -o --renderer-startup-dialog --no-sandbox --wait-for-debugger-children=renderer --renderer-process-limit=1 --allow-pre-commit-input --allow-sandbox-debugging . After that set .childdbg 1 so we can debug new spawned child processes. In essence what the upper command does is "ensure you are attached to all child processes". Shout out goes to @spoofyroot and @_coreDump for pointing me into the right direction with mutliprocess debugging. Here is how it's supposed to look after setting .childdbg 1 ![debugzzzzzz](https://user-images.githubusercontent.com/25670930/147650429-06f7de1e-ee9e-475c-864b-fe52fd541947.PNG)
+
  
 =====================================================================
 
