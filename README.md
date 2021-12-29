@@ -164,11 +164,14 @@ Now searching for any source of defintion for that we arrive at https://unicode-
 Dynamic Analysis Part
  
  
-Now in order to be able to debug it dynamically, in case you are as noob as i am you will want to run windbg from cmd.exe as follows windbg.exe chrome.exe -G -o --renderer-startup-dialog --no-sandbox --wait-for-debugger-children=renderer --renderer-process-limit=1 --allow-pre-commit-input --allow-sandbox-debugging --time-zone-for-testing="US/Pacific", and set .childdbg 1 in order to be able to debug the spawned child process. From there you will want to bp content!content::RendererMain and let it run for like 5 or 6 times. after that we got to ![reaaa](https://user-images.githubusercontent.com/25670930/147644911-d90c5ec4-9ff9-4502-bb09-5c41e95265f6.PNG). 
+Now in order to be able to debug it dynamically, in case you are as noob as i am you will want to run windbg from cmd.exe as follows windbg.exe chrome.exe -G -o --renderer-startup-dialog --no-sandbox --wait-for-debugger-children=renderer --renderer-process-limit=1 --allow-pre-commit-input --allow-sandbox-debugging --time-zone-for-testing="US/Pacific", and set .childdbg 1 in order to be able to debug the spawned child process. From there you will want to bp content!content::RendererMain and let it run for like 5 or 6 times. (sa modifici safaci referinta la 4 la video ca e mai clar asa) after that we got to ![reaaa](https://user-images.githubusercontent.com/25670930/147644911-d90c5ec4-9ff9-4502-bb09-5c41e95265f6.PNG). 
 
 
 
 
+![zanbakto3](https://user-images.githubusercontent.com/25670930/147660342-3635a2c5-44ab-4523-aee4-77e51c47aacf.PNG)
+![zanbakto](https://user-images.githubusercontent.com/25670930/147660343-e22942e1-5cb5-4a5f-8026-7c7e55a38e6d.PNG)
+![zanbakto2](https://user-images.githubusercontent.com/25670930/147660344-2faa5b06-2493-4876-97fe-c06267ba9b7a.PNG)
 
 
  
