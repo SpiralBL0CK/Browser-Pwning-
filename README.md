@@ -150,6 +150,7 @@ Dynamic Analysis Part
     While we will do the analysis of the Renderer code, we will dive a little also into blink code so we can understand what happends properly in the renderer
 
  While writing this part of the course i realised i forgot to briefly describe what this do and we do we even look into it.As we know this is the third processes started by chromium and it's called the renderer. But why is it called the "renderer".It's called so because it's job is to rendere(draws) everything we see on a website. Basically this is the reason why your table looks like a table when you go over a website or your css makes it possible to customise a piece of text.Now a little more info about it
+  
   *There are more renderer processes.One entirely separate process for each tab the browser currently has opened.
   *
  
