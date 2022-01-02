@@ -149,12 +149,20 @@ Dynamic Analysis Part
  !Disclaimer
     While we will do the analysis of the Renderer code, we will dive a little also into blink code so we can understand what happends properly in the renderer
 
- While writing this part of the course i realised i forgot to briefly describe what this do and we do we even look into it.As we know this is the third processes started by chromium and it's called the renderer. But why is it called the "renderer".It's called so because it's job is to rendere(draws) everything we see on a website. Basically this is the reason why your table looks like a table when you go over a website or your css makes it possible to customise a piece of text. Or why your js is able to do black magic*. Another important reason why we analyse this is because this is from where the most of the bugs come. Wheter we talk about html , css , or js you will all see them under blink on chrome bugs.chromium.org
+ While writing this part of the course i realised i forgot to briefly describe what this do and we do we even look into it.As we know this is the third processes started by chromium and it's called the renderer. But why is it called the "renderer".It's called so because it's job is to rendere(draws) everything we see on a website. Basically this is the reason why your table looks like a table when you go over a website or your css makes it possible to customise a piece of text. Or why your js is able to do black magic*. Another important reason why we analyse this is because this is from where the most of the bugs come. Wheter we talk about html , css , or js or any other componenet you will all see them under blink on chrome bugs.chromium.org
 
   
   *There are more renderer processes. One entirely separate process for each tab the browser currently has opened.
  
-  *
+  *This process controls anything inside the actual website tab
+ 
+  * starting with 2018, iframe received an upgrade where they all can have tabs. and such each tab of an iframe has an individual renderer process. This is called Site-Isolation
+  * It's responsability is to parse a website, draw on your screen what the website has inside of it eg. tables,images, execute javascript
+  * it is sandboxed
+  * at the core it uses a rendering engine called Blink.
+  * create, and handle url-schemes such as : chrome://,  devtools://,  chrome-error://
+  * Initialise Blink engine which will actually do all the parsing and the heavy lifting for the renderer process.
+ 
  
 Last time we left we finished the browser process analysis and now it's time we have all been waiting for to go and do the renderer analysis part. Right, when i was playing with chromium i managed to make it crash and i got the following stack trace. ![numberunu](https://user-images.githubusercontent.com/25670930/147592286-b67e985c-a31c-485c-98eb-5f0d523a831e.PNG) Based on this we know out journey starts at content::RendererMain which is located in \content\renderer\renderer_main.cc . You guest it out starting point is RendererMain. Lets start by analysing how it's defined and a little bit inside of it ![rendereranalysis](https://user-images.githubusercontent.com/25670930/147592611-aa02de93-2b40-4496-9cfc-f84f5fac9494.PNG) . We can see it accepts a parameters which is of type MainFunctionParams which means this function will accept the passed arguments to the binary. Next we add a trace point so we can know that we got to calling RendererMain, and than dereference the value of parameters and save it into command_line. Than we have some macros which check for platform specific architecture which we can ignore  ![macro](https://user-images.githubusercontent.com/25670930/147592935-3f391bc1-545d-48fc-8da0-bd19e658bf52.PNG), we check for value passed to kTimeZoneForTesting which is a time zone to use for testing, than we get to meet a new class and data type used call icu. 
  ![habarnam](https://user-images.githubusercontent.com/25670930/147646126-2e383fcf-706b-4914-8de4-1668b92831a3.PNG)
