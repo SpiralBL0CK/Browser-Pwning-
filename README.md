@@ -2,11 +2,11 @@
 A proper well structured documentation for getting started with chrome pwning &amp; v8 pwning 
 
 
-# Structure of document
-| How this doc is organised  | 
-| ------------- | 
-| 1. Motivation | 
-| 2. Actual Study Material | 
+## Structure of document
+How this doc is organised 
+
+1. [Motivation](#Motivation) 
+2. Actual Study Material 
 
 
 # Motivation
@@ -214,7 +214,7 @@ Now in order to be able to debug it dynamically, in case you are as noob as i am
  
               
               
-              ![soulk2](https://user-images.githubusercontent.com/25670930/147660857-867158b9-973c-4094-944c-7e8cdf221459.PNG)
+![soulk2](https://user-images.githubusercontent.com/25670930/147660857-867158b9-973c-4094-944c-7e8cdf221459.PNG)
 ![soukl](https://user-images.githubusercontent.com/25670930/147660859-8f6c6fcb-f3eb-4cff-b328-e6e554fdae71.PNG)
 
               
